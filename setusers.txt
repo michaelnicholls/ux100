@@ -1,0 +1,19 @@
+
+drop procedure set_UX100_users;
+
+create procedure set_UX100_users(in password nvarchar(30)) as
+begin
+declare thisUser varchar(30);
+declare cursor userCursor for select user_name from users where user_name like 'TRAIN-%';
+exec 'alter system alter configuration (''indexserver.ini'',''SYSTEM'') set (''password policy'', ''last_used_passwords'') = ''0'' with reconfigure';
+   for userRow as userCursor do
+   		thisUser := userRow.user_name;
+    	 exec 'alter user '||:thisUser||' password '||:password;
+     		exec 'alter user '||:thisUser||' enable password';
+     	exec 'alter user '||:thisUser||' disable password lifetime';
+     	exec 'call grant_activated_role(''sap.hana.democontent.epm.roles::User'','''||:thisUser||''')';
+     	exec 'call grant_activated_role(''sap.hana.ide.core.roles::Consumer'','''||:thisUser||''')';
+end for;
+end;
+
+call set_UX100_users('Welcome1');
