@@ -23,6 +23,79 @@ protected section.
 
   data mo_injection type ref to /IWBEP/IF_SB_GEN_DPC_INJECTION .
 
+  methods CALCULATORSET_CREATE_ENTITY
+    importing
+      !IV_ENTITY_NAME type STRING
+      !IV_ENTITY_SET_NAME type STRING
+      !IV_SOURCE_NAME type STRING
+      !IT_KEY_TAB type /IWBEP/T_MGW_NAME_VALUE_PAIR
+      !IO_TECH_REQUEST_CONTEXT type ref to /IWBEP/IF_MGW_REQ_ENTITY_C optional
+      !IT_NAVIGATION_PATH type /IWBEP/T_MGW_NAVIGATION_PATH
+      !IO_DATA_PROVIDER type ref to /IWBEP/IF_MGW_ENTRY_PROVIDER optional
+    exporting
+      !ER_ENTITY type ZCL_Z_DYNAMIC_TILE_MPC=>TS_CALCULATOR
+    raising
+      /IWBEP/CX_MGW_BUSI_EXCEPTION
+      /IWBEP/CX_MGW_TECH_EXCEPTION .
+  methods CALCULATORSET_DELETE_ENTITY
+    importing
+      !IV_ENTITY_NAME type STRING
+      !IV_ENTITY_SET_NAME type STRING
+      !IV_SOURCE_NAME type STRING
+      !IT_KEY_TAB type /IWBEP/T_MGW_NAME_VALUE_PAIR
+      !IO_TECH_REQUEST_CONTEXT type ref to /IWBEP/IF_MGW_REQ_ENTITY_D optional
+      !IT_NAVIGATION_PATH type /IWBEP/T_MGW_NAVIGATION_PATH
+    raising
+      /IWBEP/CX_MGW_BUSI_EXCEPTION
+      /IWBEP/CX_MGW_TECH_EXCEPTION .
+  methods CALCULATORSET_GET_ENTITY
+    importing
+      !IV_ENTITY_NAME type STRING
+      !IV_ENTITY_SET_NAME type STRING
+      !IV_SOURCE_NAME type STRING
+      !IT_KEY_TAB type /IWBEP/T_MGW_NAME_VALUE_PAIR
+      !IO_REQUEST_OBJECT type ref to /IWBEP/IF_MGW_REQ_ENTITY optional
+      !IO_TECH_REQUEST_CONTEXT type ref to /IWBEP/IF_MGW_REQ_ENTITY optional
+      !IT_NAVIGATION_PATH type /IWBEP/T_MGW_NAVIGATION_PATH
+    exporting
+      !ER_ENTITY type ZCL_Z_DYNAMIC_TILE_MPC=>TS_CALCULATOR
+      !ES_RESPONSE_CONTEXT type /IWBEP/IF_MGW_APPL_SRV_RUNTIME=>TY_S_MGW_RESPONSE_ENTITY_CNTXT
+    raising
+      /IWBEP/CX_MGW_BUSI_EXCEPTION
+      /IWBEP/CX_MGW_TECH_EXCEPTION .
+  methods CALCULATORSET_GET_ENTITYSET
+    importing
+      !IV_ENTITY_NAME type STRING
+      !IV_ENTITY_SET_NAME type STRING
+      !IV_SOURCE_NAME type STRING
+      !IT_FILTER_SELECT_OPTIONS type /IWBEP/T_MGW_SELECT_OPTION
+      !IS_PAGING type /IWBEP/S_MGW_PAGING
+      !IT_KEY_TAB type /IWBEP/T_MGW_NAME_VALUE_PAIR
+      !IT_NAVIGATION_PATH type /IWBEP/T_MGW_NAVIGATION_PATH
+      !IT_ORDER type /IWBEP/T_MGW_SORTING_ORDER
+      !IV_FILTER_STRING type STRING
+      !IV_SEARCH_STRING type STRING
+      !IO_TECH_REQUEST_CONTEXT type ref to /IWBEP/IF_MGW_REQ_ENTITYSET optional
+    exporting
+      !ET_ENTITYSET type ZCL_Z_DYNAMIC_TILE_MPC=>TT_CALCULATOR
+      !ES_RESPONSE_CONTEXT type /IWBEP/IF_MGW_APPL_SRV_RUNTIME=>TY_S_MGW_RESPONSE_CONTEXT
+    raising
+      /IWBEP/CX_MGW_BUSI_EXCEPTION
+      /IWBEP/CX_MGW_TECH_EXCEPTION .
+  methods CALCULATORSET_UPDATE_ENTITY
+    importing
+      !IV_ENTITY_NAME type STRING
+      !IV_ENTITY_SET_NAME type STRING
+      !IV_SOURCE_NAME type STRING
+      !IT_KEY_TAB type /IWBEP/T_MGW_NAME_VALUE_PAIR
+      !IO_TECH_REQUEST_CONTEXT type ref to /IWBEP/IF_MGW_REQ_ENTITY_U optional
+      !IT_NAVIGATION_PATH type /IWBEP/T_MGW_NAVIGATION_PATH
+      !IO_DATA_PROVIDER type ref to /IWBEP/IF_MGW_ENTRY_PROVIDER optional
+    exporting
+      !ER_ENTITY type ZCL_Z_DYNAMIC_TILE_MPC=>TS_CALCULATOR
+    raising
+      /IWBEP/CX_MGW_BUSI_EXCEPTION
+      /IWBEP/CX_MGW_TECH_EXCEPTION .
   methods DATASET_CREATE_ENTITY
     importing
       !IV_ENTITY_NAME type STRING
@@ -110,19 +183,43 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC IMPLEMENTATION.
   method /IWBEP/IF_MGW_APPL_SRV_RUNTIME~CREATE_ENTITY.
 *&----------------------------------------------------------------------------------------------*
 *&  Include           /IWBEP/DPC_TEMP_CRT_ENTITY_BASE
-*&* This class has been generated on 07.12.2022 06:03:19 in client 100
+*&* This class has been generated on 13.12.2022 03:14:03 in client 100
 *&*
 *&*       WARNING--> NEVER MODIFY THIS CLASS <--WARNING
 *&*   If you want to change the DPC implementation, use the
 *&*   generated methods inside the DPC provider subclass - ZCL_Z_DYNAMIC_TILE_DPC_EXT
 *&-----------------------------------------------------------------------------------------------*
 
+ DATA calculatorset_create_entity TYPE zcl_z_dynamic_tile_mpc=>ts_calculator.
  DATA dataset_create_entity TYPE zcl_z_dynamic_tile_mpc=>ts_data.
  DATA lv_entityset_name TYPE string.
 
 lv_entityset_name = io_tech_request_context->get_entity_set_name( ).
 
 CASE lv_entityset_name.
+*-------------------------------------------------------------------------*
+*             EntitySet -  calculatorSet
+*-------------------------------------------------------------------------*
+     WHEN 'calculatorSet'.
+*     Call the entity set generated method
+    calculatorset_create_entity(
+         EXPORTING iv_entity_name     = iv_entity_name
+                   iv_entity_set_name = iv_entity_set_name
+                   iv_source_name     = iv_source_name
+                   io_data_provider   = io_data_provider
+                   it_key_tab         = it_key_tab
+                   it_navigation_path = it_navigation_path
+                   io_tech_request_context = io_tech_request_context
+       	 IMPORTING er_entity          = calculatorset_create_entity
+    ).
+*     Send specific entity data to the caller interfaces
+    copy_data_to_ref(
+      EXPORTING
+        is_data = calculatorset_create_entity
+      CHANGING
+        cr_data = er_entity
+   ).
+
 *-------------------------------------------------------------------------*
 *             EntitySet -  dataSet
 *-------------------------------------------------------------------------*
@@ -165,7 +262,7 @@ ENDCASE.
   method /IWBEP/IF_MGW_APPL_SRV_RUNTIME~DELETE_ENTITY.
 *&----------------------------------------------------------------------------------------------*
 *&  Include           /IWBEP/DPC_TEMP_DEL_ENTITY_BASE
-*&* This class has been generated on 07.12.2022 06:03:19 in client 100
+*&* This class has been generated on 13.12.2022 03:14:03 in client 100
 *&*
 *&*       WARNING--> NEVER MODIFY THIS CLASS <--WARNING
 *&*   If you want to change the DPC implementation, use the
@@ -177,6 +274,20 @@ ENDCASE.
 lv_entityset_name = io_tech_request_context->get_entity_set_name( ).
 
 CASE lv_entityset_name.
+*-------------------------------------------------------------------------*
+*             EntitySet -  calculatorSet
+*-------------------------------------------------------------------------*
+      when 'calculatorSet'.
+*     Call the entity set generated method
+     calculatorset_delete_entity(
+          EXPORTING iv_entity_name     = iv_entity_name
+                    iv_entity_set_name = iv_entity_set_name
+                    iv_source_name     = iv_source_name
+                    it_key_tab         = it_key_tab
+                    it_navigation_path = it_navigation_path
+                    io_tech_request_context = io_tech_request_context
+     ).
+
 *-------------------------------------------------------------------------*
 *             EntitySet -  dataSet
 *-------------------------------------------------------------------------*
@@ -207,13 +318,14 @@ CASE lv_entityset_name.
   method /IWBEP/IF_MGW_APPL_SRV_RUNTIME~GET_ENTITY.
 *&-----------------------------------------------------------------------------------------------*
 *&  Include           /IWBEP/DPC_TEMP_GETENTITY_BASE
-*&* This class has been generated  on 07.12.2022 06:03:19 in client 100
+*&* This class has been generated  on 13.12.2022 03:14:03 in client 100
 *&*
 *&*       WARNING--> NEVER MODIFY THIS CLASS <--WARNING
 *&*   If you want to change the DPC implementation, use the
 *&*   generated methods inside the DPC provider subclass - ZCL_Z_DYNAMIC_TILE_DPC_EXT
 *&-----------------------------------------------------------------------------------------------*
 
+ DATA calculatorset_get_entity TYPE zcl_z_dynamic_tile_mpc=>ts_calculator.
  DATA dataset_get_entity TYPE zcl_z_dynamic_tile_mpc=>ts_data.
  DATA lv_entityset_name TYPE string.
  DATA lr_entity TYPE REF TO data.       "#EC NEEDED
@@ -221,6 +333,34 @@ CASE lv_entityset_name.
 lv_entityset_name = io_tech_request_context->get_entity_set_name( ).
 
 CASE lv_entityset_name.
+*-------------------------------------------------------------------------*
+*             EntitySet -  calculatorSet
+*-------------------------------------------------------------------------*
+      WHEN 'calculatorSet'.
+*     Call the entity set generated method
+          calculatorset_get_entity(
+               EXPORTING iv_entity_name     = iv_entity_name
+                         iv_entity_set_name = iv_entity_set_name
+                         iv_source_name     = iv_source_name
+                         it_key_tab         = it_key_tab
+                         it_navigation_path = it_navigation_path
+                         io_tech_request_context = io_tech_request_context
+             	 IMPORTING er_entity          = calculatorset_get_entity
+                         es_response_context = es_response_context
+          ).
+
+        IF calculatorset_get_entity IS NOT INITIAL.
+*     Send specific entity data to the caller interface
+          copy_data_to_ref(
+            EXPORTING
+              is_data = calculatorset_get_entity
+            CHANGING
+              cr_data = er_entity
+          ).
+        ELSE.
+*         In case of initial values - unbind the entity reference
+          er_entity = lr_entity.
+        ENDIF.
 *-------------------------------------------------------------------------*
 *             EntitySet -  dataSet
 *-------------------------------------------------------------------------*
@@ -268,18 +408,49 @@ CASE lv_entityset_name.
   method /IWBEP/IF_MGW_APPL_SRV_RUNTIME~GET_ENTITYSET.
 *&----------------------------------------------------------------------------------------------*
 *&  Include           /IWBEP/DPC_TMP_ENTITYSET_BASE
-*&* This class has been generated on 07.12.2022 06:03:19 in client 100
+*&* This class has been generated on 13.12.2022 03:14:03 in client 100
 *&*
 *&*       WARNING--> NEVER MODIFY THIS CLASS <--WARNING
 *&*   If you want to change the DPC implementation, use the
 *&*   generated methods inside the DPC provider subclass - ZCL_Z_DYNAMIC_TILE_DPC_EXT
 *&-----------------------------------------------------------------------------------------------*
+ DATA calculatorset_get_entityset TYPE zcl_z_dynamic_tile_mpc=>tt_calculator.
  DATA dataset_get_entityset TYPE zcl_z_dynamic_tile_mpc=>tt_data.
  DATA lv_entityset_name TYPE string.
 
 lv_entityset_name = io_tech_request_context->get_entity_set_name( ).
 
 CASE lv_entityset_name.
+*-------------------------------------------------------------------------*
+*             EntitySet -  calculatorSet
+*-------------------------------------------------------------------------*
+   WHEN 'calculatorSet'.
+*     Call the entity set generated method
+      calculatorset_get_entityset(
+        EXPORTING
+         iv_entity_name = iv_entity_name
+         iv_entity_set_name = iv_entity_set_name
+         iv_source_name = iv_source_name
+         it_filter_select_options = it_filter_select_options
+         it_order = it_order
+         is_paging = is_paging
+         it_navigation_path = it_navigation_path
+         it_key_tab = it_key_tab
+         iv_filter_string = iv_filter_string
+         iv_search_string = iv_search_string
+         io_tech_request_context = io_tech_request_context
+       IMPORTING
+         et_entityset = calculatorset_get_entityset
+         es_response_context = es_response_context
+       ).
+*     Send specific entity data to the caller interface
+      copy_data_to_ref(
+        EXPORTING
+          is_data = calculatorset_get_entityset
+        CHANGING
+          cr_data = er_entityset
+      ).
+
 *-------------------------------------------------------------------------*
 *             EntitySet -  dataSet
 *-------------------------------------------------------------------------*
@@ -333,13 +504,14 @@ CASE lv_entityset_name.
   method /IWBEP/IF_MGW_APPL_SRV_RUNTIME~UPDATE_ENTITY.
 *&----------------------------------------------------------------------------------------------*
 *&  Include           /IWBEP/DPC_TEMP_UPD_ENTITY_BASE
-*&* This class has been generated on 07.12.2022 06:03:19 in client 100
+*&* This class has been generated on 13.12.2022 03:14:03 in client 100
 *&*
 *&*       WARNING--> NEVER MODIFY THIS CLASS <--WARNING
 *&*   If you want to change the DPC implementation, use the
 *&*   generated methods inside the DPC provider subclass - ZCL_Z_DYNAMIC_TILE_DPC_EXT
 *&-----------------------------------------------------------------------------------------------*
 
+ DATA calculatorset_update_entity TYPE zcl_z_dynamic_tile_mpc=>ts_calculator.
  DATA dataset_update_entity TYPE zcl_z_dynamic_tile_mpc=>ts_data.
  DATA lv_entityset_name TYPE string.
  DATA lr_entity TYPE REF TO data. "#EC NEEDED
@@ -347,6 +519,33 @@ CASE lv_entityset_name.
 lv_entityset_name = io_tech_request_context->get_entity_set_name( ).
 
 CASE lv_entityset_name.
+*-------------------------------------------------------------------------*
+*             EntitySet -  calculatorSet
+*-------------------------------------------------------------------------*
+      WHEN 'calculatorSet'.
+*     Call the entity set generated method
+          calculatorset_update_entity(
+               EXPORTING iv_entity_name     = iv_entity_name
+                         iv_entity_set_name = iv_entity_set_name
+                         iv_source_name     = iv_source_name
+                         io_data_provider   = io_data_provider
+                         it_key_tab         = it_key_tab
+                         it_navigation_path = it_navigation_path
+                         io_tech_request_context = io_tech_request_context
+             	 IMPORTING er_entity          = calculatorset_update_entity
+          ).
+       IF calculatorset_update_entity IS NOT INITIAL.
+*     Send specific entity data to the caller interface
+          copy_data_to_ref(
+            EXPORTING
+              is_data = calculatorset_update_entity
+            CHANGING
+              cr_data = er_entity
+          ).
+        ELSE.
+*         In case of initial values - unbind the entity reference
+          er_entity = lr_entity.
+        ENDIF.
 *-------------------------------------------------------------------------*
 *             EntitySet -  dataSet
 *-------------------------------------------------------------------------*
@@ -546,5 +745,45 @@ lo_logger = /iwbep/if_mgw_conv_srv_runtime~get_logger( ).
     EXPORTING
       textid = /iwbep/cx_mgw_not_impl_exc=>method_not_implemented
       method = 'DATASET_UPDATE_ENTITY'.
+  endmethod.
+
+
+  method CALCULATORSET_CREATE_ENTITY.
+  RAISE EXCEPTION TYPE /iwbep/cx_mgw_not_impl_exc
+    EXPORTING
+      textid = /iwbep/cx_mgw_not_impl_exc=>method_not_implemented
+      method = 'CALCULATORSET_CREATE_ENTITY'.
+  endmethod.
+
+
+  method CALCULATORSET_DELETE_ENTITY.
+  RAISE EXCEPTION TYPE /iwbep/cx_mgw_not_impl_exc
+    EXPORTING
+      textid = /iwbep/cx_mgw_not_impl_exc=>method_not_implemented
+      method = 'CALCULATORSET_DELETE_ENTITY'.
+  endmethod.
+
+
+  method CALCULATORSET_GET_ENTITY.
+  RAISE EXCEPTION TYPE /iwbep/cx_mgw_not_impl_exc
+    EXPORTING
+      textid = /iwbep/cx_mgw_not_impl_exc=>method_not_implemented
+      method = 'CALCULATORSET_GET_ENTITY'.
+  endmethod.
+
+
+  method CALCULATORSET_GET_ENTITYSET.
+  RAISE EXCEPTION TYPE /iwbep/cx_mgw_not_impl_exc
+    EXPORTING
+      textid = /iwbep/cx_mgw_not_impl_exc=>method_not_implemented
+      method = 'CALCULATORSET_GET_ENTITYSET'.
+  endmethod.
+
+
+  method CALCULATORSET_UPDATE_ENTITY.
+  RAISE EXCEPTION TYPE /iwbep/cx_mgw_not_impl_exc
+    EXPORTING
+      textid = /iwbep/cx_mgw_not_impl_exc=>method_not_implemented
+      method = 'CALCULATORSET_UPDATE_ENTITY'.
   endmethod.
 ENDCLASS.
