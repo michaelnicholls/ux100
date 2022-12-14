@@ -21,13 +21,13 @@
     <item>
      <ID>I</ID>
      <KEY>DBZ</KEY>
-     <ENTRY>no division by 0</ENTRY>
+     <ENTRY>no division by 0 allowed</ENTRY>
      <LENGTH>26</LENGTH>
     </item>
     <item>
      <ID>I</ID>
      <KEY>NPZ</KEY>
-     <ENTRY>no percent of 0</ENTRY>
+     <ENTRY>no percent of 0 allowed</ENTRY>
      <LENGTH>25</LENGTH>
     </item>
    </TPOOL>
