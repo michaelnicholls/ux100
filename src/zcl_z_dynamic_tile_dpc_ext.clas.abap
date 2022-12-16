@@ -4,6 +4,7 @@ CLASS zcl_z_dynamic_tile_dpc_ext DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
+
 protected section.
 
   methods CALC
@@ -132,6 +133,7 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
           ).
   er_entity-error = lv_error.
   er_entity-result = lv_res.
+  er_entity-ops = '+-*/%'.
   ENDMETHOD.
 
 
@@ -139,7 +141,7 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
     DATA(lv_op1) = 30.
     DATA(lv_op2) = 20.
     DATA lv_op TYPE string VALUE '+'.
-
+    data(validops) =  '+-*/%'.
     CALL METHOD calc(
       EXPORTING
         iv_op    = lv_op
@@ -148,7 +150,8 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
       IMPORTING
         ev_error = DATA(ev_error)
         ev_res   = DATA(ev_res) ).
-    et_entityset = VALUE #( BASE et_entityset ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ) ).
+    et_entityset = VALUE #( BASE et_entityset
+    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
 
     lv_op = '-'.
     CALL METHOD calc(
@@ -159,7 +162,8 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
       IMPORTING
         ev_error = ev_error
         ev_res   = ev_res ).
-    et_entityset = VALUE #( BASE et_entityset ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ) ).
+    et_entityset = VALUE #( BASE et_entityset
+    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
 
     lv_op = '*'.
     CALL METHOD calc(
@@ -170,7 +174,8 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
       IMPORTING
         ev_error = ev_error
         ev_res   = ev_res ).
-    et_entityset = VALUE #( BASE et_entityset ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ) ).
+    et_entityset = VALUE #( BASE et_entityset
+    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
 
     lv_op = '/'.
     CALL METHOD calc(
@@ -181,7 +186,8 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
       IMPORTING
         ev_error = ev_error
         ev_res   = ev_res ).
-    et_entityset = VALUE #( BASE et_entityset ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ) ).
+    et_entityset = VALUE #( BASE et_entityset
+    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
 
     lv_op = '%'.
     CALL METHOD calc(
@@ -192,7 +198,8 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
       IMPORTING
         ev_error = ev_error
         ev_res   = ev_res ).
-    et_entityset = VALUE #( BASE et_entityset ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ) ).
+    et_entityset = VALUE #( BASE et_entityset
+    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
 
   ENDMETHOD.
 ENDCLASS.
