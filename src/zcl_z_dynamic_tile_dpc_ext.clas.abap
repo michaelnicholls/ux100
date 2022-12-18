@@ -23,6 +23,7 @@ protected section.
   methods DATASET_GET_ENTITY
     redefinition .
   PRIVATE SECTION.
+  class-data validops type string value '+-*/%'.
 ENDCLASS.
 
 
@@ -133,73 +134,29 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
           ).
   er_entity-error = lv_error.
   er_entity-result = lv_res.
-  er_entity-ops = '+-*/%'.
+  er_entity-ops = validops.
   ENDMETHOD.
 
 
-  METHOD calculatorset_get_entityset.
-    DATA(lv_op1) = 30.
-    DATA(lv_op2) = 20.
-    DATA lv_op TYPE string VALUE '+'.
-    data(validops) =  '+-*/%'.
+METHOD calculatorset_get_entityset.
+  DATA(lv_op1) = 30.
+  DATA(lv_op2) = 20.
+  DATA lv_op TYPE string VALUE '+'.
+*    data(validops) =  '+-*/%'.
+  DO STRLEN( validops ) TIMES.
+    DATA(I) = sy-INDEX.
+    I = I - I.
+    lv_op = validops+1(1).
     CALL METHOD calc(
-      EXPORTING
-        iv_op    = lv_op
-        iv_op1   = lv_op1
-        iv_op2   = lv_op2
-      IMPORTING
-        ev_error = DATA(ev_error)
-        ev_res   = DATA(ev_res) ).
+    EXPORTING
+      iv_op    = lv_op
+      iv_op1   = lv_op1
+      iv_op2   = lv_op2
+    IMPORTING
+    ev_error = DATA(ev_error)
+    ev_res   = DATA(ev_res) ).
     et_entityset = VALUE #( BASE et_entityset
     ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
-
-    lv_op = '-'.
-    CALL METHOD calc(
-      EXPORTING
-        iv_op    = lv_op
-        iv_op1   = lv_op1
-        iv_op2   = lv_op2
-      IMPORTING
-        ev_error = ev_error
-        ev_res   = ev_res ).
-    et_entityset = VALUE #( BASE et_entityset
-    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
-
-    lv_op = '*'.
-    CALL METHOD calc(
-      EXPORTING
-        iv_op    = lv_op
-        iv_op1   = lv_op1
-        iv_op2   = lv_op2
-      IMPORTING
-        ev_error = ev_error
-        ev_res   = ev_res ).
-    et_entityset = VALUE #( BASE et_entityset
-    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
-
-    lv_op = '/'.
-    CALL METHOD calc(
-      EXPORTING
-        iv_op    = lv_op
-        iv_op1   = lv_op1
-        iv_op2   = lv_op2
-      IMPORTING
-        ev_error = ev_error
-        ev_res   = ev_res ).
-    et_entityset = VALUE #( BASE et_entityset
-    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
-
-    lv_op = '%'.
-    CALL METHOD calc(
-      EXPORTING
-        iv_op    = lv_op
-        iv_op1   = lv_op1
-        iv_op2   = lv_op2
-      IMPORTING
-        ev_error = ev_error
-        ev_res   = ev_res ).
-    et_entityset = VALUE #( BASE et_entityset
-    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
-
-  ENDMETHOD.
+  ENDDO.
+ENDMETHOD.
 ENDCLASS.
