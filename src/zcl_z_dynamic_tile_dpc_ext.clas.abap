@@ -143,10 +143,12 @@ METHOD calculatorset_get_entityset.
   DATA(lv_op2) = 20.
   DATA lv_op TYPE string VALUE '+'.
 *    data(validops) =  '+-*/%'.
-  DO STRLEN( validops ) TIMES.
+  data(top) = io_tech_request_context->get_top( ).
+  if top > strlen( validops ) or top is initial . top = strlen( validops ). endif.
+  DO top TIMES.
     DATA(I) = sy-INDEX.
-    I = I - I.
-    lv_op = validops+1(1).
+    I = I - 1.
+    lv_op = validops+i(1).
     CALL METHOD calc(
     EXPORTING
       iv_op    = lv_op
