@@ -25,3 +25,8 @@ Expand Pages with Flow logic and right click index.html to Select Test
 
 Skip past the warning and enter your ABAP credentials
 
+Sample CDS calculator URL
+
+/sap/opu/odata/sap/ZCALC_CDS/ZCALC(op1=10,op2=20,op='+')/Set
+
+
