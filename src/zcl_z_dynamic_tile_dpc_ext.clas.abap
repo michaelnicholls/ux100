@@ -149,6 +149,12 @@ METHOD calculatorset_get_entityset.
     DATA(I) = sy-INDEX.
     I = I - 1.
     lv_op = validops+i(1).
+    CALL FUNCTION 'QF05_RANDOM_INTEGER'
+      IMPORTING
+        ran_int = lv_op1.
+    CALL FUNCTION 'QF05_RANDOM_INTEGER'
+      IMPORTING
+        ran_int = lv_op2.
     CALL METHOD calc(
     EXPORTING
       iv_op    = lv_op
