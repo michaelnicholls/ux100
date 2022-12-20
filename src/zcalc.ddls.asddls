@@ -15,7 +15,7 @@ define view ZCALC
 //  key $parameters.op1 as operand1,
 //  key $parameters.op2 as operand2,
 //  key $parameters.op  as operator,
-    key 'XX' as xx,
+    key '' as x,
       case $parameters.op
           when '+' then
         $parameters.op1 + $parameters.op2
