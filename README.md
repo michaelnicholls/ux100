@@ -29,4 +29,17 @@ Sample CDS calculator URL
 
 /sap/opu/odata/sap/ZCALC_CDS/ZCALC(op1=10,op2=20,op='+')/Set
 
+With the calculator services, you need to replace the operator with its encoded value:
+for 
+>for  +, use %2B
+ 
+>for - (ok as is)
+
+>for *, use %2A
+
+>for /, use %2F
+
+>for %, use %25
+
+
 
