@@ -1,8 +1,8 @@
 # ux100
 
-Use ZABAPGITHUB_STANDALONE to import the contents
-You may need to follow https://docs.abapgit.org/guide-ssl-setup.html#:~:text=Downloading%20The%20Certificate%20File# to handle
-certificates
+Use ZABAPGITHUB_STANDALONE to import the contents from https://github.com/michaelnicholls/ux100.git
+
+You may need to follow https://docs.abapgit.org/guide-ssl-setup.html#:~:text=Downloading%20The%20Certificate%20File# to handle the SSL certificates
 
 In SEGW, open the project Z_DYNAMIC_TILE
 Under Service Maintenance, right click LOCAL_GW and select Maintain
@@ -25,7 +25,7 @@ Expand Pages with Flow logic and right click index.html to Select Test
 
 Skip past the warning and enter your ABAP credentials
 
-Sample CDS calculator URL
+Sample CDS calculator OData URL
 
 /sap/opu/odata/sap/ZCALC_CDS/ZCALC(op1=10,op2=20,op='+')/Set
 
