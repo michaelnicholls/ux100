@@ -14,7 +14,7 @@ In the view, select New Entries
 Select service doc identifier Z_DYNAMIC_TILE_SRV_0001, SAP System alias: LOCAL and check Default system
 Save and add/create a transport
 Go back to the service catalog and select SAP Gateway Client
-You should be able to get a loist of entities and test them
+You should be able to get a list of entity sets and test them
 
 To test the dynamic tile, use /sap/opu/odata/sap/Z_DYNAMIC_TILE_SRV/dataSet('')
 
