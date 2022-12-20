@@ -5,8 +5,8 @@
    <DDLS>
     <DDLNAME>ZCALC</DDLNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
-    <DDTEXT>CDS calculator</DDTEXT>
-    <SOURCE_TYPE>V</SOURCE_TYPE>
+    <DDTEXT>Calculator CDS entity</DDTEXT>
+    <SOURCE_TYPE>W</SOURCE_TYPE>
    </DDLS>
   </asx:values>
  </asx:abap>

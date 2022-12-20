@@ -1,12 +1,14 @@
-@AbapCatalog.sqlViewName: 'Z__CALC'
-@AbapCatalog.compiler.compareFilter: true
-@AbapCatalog.preserveKey: true
+@AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #NOT_REQUIRED
-@EndUserText.label: 'CDS calculator'
-
+@EndUserText.label: 'entity'
 @OData.publish: true
-define view ZCALC
-  with parameters
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+define view entity ZCALC  with parameters
     op1 :int4,
     op2 :int4,
     op  :char1
