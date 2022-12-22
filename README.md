@@ -29,6 +29,11 @@ Sample CDS calculator OData URL
 
 /sap/opu/odata/sap/ZCALC_CDS/ZCALC(op1=10,op2=20,op='+')/Set
 
+or
+
+/sap/opu/odata/sap/ZCALC_CDS/ZCALCSet(op1=10,op2=20,op='%2B',x='')
+
+
 With the calculator services, you need to replace the operator with its encoded value:
 
 >for  +, use %2B
