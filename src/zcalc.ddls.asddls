@@ -9,43 +9,41 @@
     dataClass: #MIXED
 }
 define view entity ZCALC  with parameters
-    op1 :int4,
-    op2 :int4,
-    op  :char1
+    operand1 :int4,
+    operand2 :int4,
+    operator  :char1
   as select from t000
 {
-//  key $parameters.op1 as operand1,
-//  key $parameters.op2 as operand2,
-//  key $parameters.op  as operator,
+
     key '' as x,
-      case $parameters.op
+      case $parameters.operator
           when '+' then
-        $parameters.op1 + $parameters.op2
+        $parameters.operand1 + $parameters.operand2
           when '-' then
-        $parameters.op1 - $parameters.op2
+        $parameters.operand1 - $parameters.operand2
           when '*' then
-        $parameters.op1 * $parameters.op2
+        $parameters.operand1 * $parameters.operand2
           when '/' then
-          case  $parameters.op2 when  0 then 0
+          case  $parameters.operand2 when  0 then 0
 //
 // handle division by 0
 //
-          else division($parameters.op1, $parameters.op2, 2 )
+          else division($parameters.operand1, $parameters.operand2, 2 )
           end
            when '%' then
-          case  $parameters.op2 when  0 then 0
+          case  $parameters.operand2 when  0 then 0
 //
 // handle percentage of 0
 //
 
 
-          else div(100 * $parameters.op1, $parameters.op2 )
+          else div(100 * $parameters.operand1, $parameters.operand2 )
           end
         else
           0
         end           as res,
 
-      case $parameters.op
+      case $parameters.operator
         when '+' then
       ''
         when '-' then
@@ -53,12 +51,12 @@ define view entity ZCALC  with parameters
         when '*' then
       ''
         when '/' then
-        case $parameters.op2 when 0 then 'No division by 0'
+        case $parameters.operand2 when 0 then 'No division by 0'
         else
       ''
       end
         when '%' then
-        case $parameters.op2 when 0 then 'No percentage of 0'
+        case $parameters.operand2 when 0 then 'No percentage of 0'
         else
       ''
       end
