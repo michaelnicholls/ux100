@@ -27,11 +27,11 @@ Skip past the warning and enter your ABAP credentials
 
 Sample CDS calculator OData URL
 
-/sap/opu/odata/sap/ZCALC_CDS/ZCALC(op1=10,op2=20,op='+')/Set
+/sap/opu/odata/sap/ZCALC_CDS/ZCALC(operand1=10,operand2=20,operator='+')/Set
 
 or
 
-/sap/opu/odata/sap/ZCALC_CDS/ZCALCSet(op1=10,op2=20,op='%2B',x='')
+/sap/opu/odata/sap/ZCALC_CDS/ZCALCSet(operand1=10,operand2=20,operator='%2B',x='')
 
 
 With the calculator services, you need to replace the operator with its encoded value:
@@ -46,5 +46,5 @@ With the calculator services, you need to replace the operator with its encoded 
 
 >for %, use %25
 
-
+Adding the parameter &source=CDS to the UI5 app will use the CDS service instead of the Gateway service
 
