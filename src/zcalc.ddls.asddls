@@ -64,8 +64,8 @@ define view entity ZCALC  with parameters
       end
       else
         'Bad operator'
-      end             as error
-
+      end             as error,
+    '+-*/%' as ops
 }
 where
   mandt = '000'
