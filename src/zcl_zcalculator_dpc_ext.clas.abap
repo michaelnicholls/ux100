@@ -1,6 +1,6 @@
 class ZCL_ZCALCULATOR_DPC_EXT definition
   PUBLIC
-  INHERITING FROM zcl_z_dynamic_tile_dpc
+  INHERITING FROM zcl_zcalculator_dpc
   CREATE PUBLIC .
 
   PUBLIC SECTION.
