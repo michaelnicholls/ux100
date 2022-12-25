@@ -33,6 +33,8 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
           ran3 LIKE ran1,
           ran4 LIKE ran1,
           ran5 LIKE ran1..
+    io_tech_request_context->get_converted_keys(
+      IMPORTING es_key_values = er_entity ).
 
     WRITE sy-datum TO text DD/MM/YYYY.
     er_entity-numberunit = text.
@@ -66,11 +68,11 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
     IF ran2 < 25. er_entity-numberstate = 'Negative'. ENDIF.
     IF ran2 > 50. er_entity-numberstate = 'Neutral'. ENDIF.
     IF ran2 > 75. er_entity-numberstate = 'Critical'. ENDIF.
-    er_entity-subtitle = sy-sysid.
+    er_entity-subtitle = | { sy-sysid }:{ sy-uname } |.
     er_entity-statearrow = 'Up'.
     IF ran3 < 30. er_entity-statearrow = 'Down'. ENDIF.
     IF ran3 > 60. er_entity-statearrow = 'Neutral'. ENDIF.
-    er_entity-title = sy-uname.
+    er_entity-title = er_entity-key.
     text = 'in-process'.
     IF ran5 < 20. text = 'completed'. ENDIF.
     IF ran5 > 40. text = 'critical'. ENDIF.
