@@ -71,20 +71,21 @@ Adding the parameter &source=CDS to the UI5 app will use the CDS service instead
 You can add the Fiori app to a catalog using /UI2/FLPCM_CUST, create/select a catalog and then use the designer
 Suggested target mapping...
 semantic object: calculator
-action: Start
+action: start
 title: Calculator
 url: /sap/bc/ui5_ui5/sap/zcalculator
 ID: p1
 
 Suggested dynamic tile...
 Title: Calculator
-semantic obecjt: calculator
-action: Start
-sservice URL: /sap/opu/odata/sap/Z_DYNAMIC_TILE_SRV/dataSet('')
+semantic object: calculator
+action: start
+service URL: /sap/opu/odata/sap/Z_DYNAMIC_TILE_SRV/dataSet('') (or some other value in '')
+refresh interval: 120 (or some other value)
 
-Use PFCG to create/change role to use your catalog and assign to some users
+Use PFCG to create/change a role to use your catalog and assign to some users
 
-Launch FLP and use App Filder to add the Calculator tile to a group or page
+Launch FLP and use App Finder to add the Calculator tile to a group or page
 
 
 
