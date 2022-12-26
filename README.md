@@ -57,7 +57,7 @@ Add a new dynamic tile
 * service URL: /sap/opu/odata/sap/Z_DYNAMIC_TILE_SRV/dataSet('') (or some other value in '')
 * refresh interval: 120 (or some other value)
 
-You may need to create your own catalog as a copy Z_TC_CALCULATOR using transaction /ui2/flpd_cust
+You may need to create your own catalog as a copy of the contents of Z_TC_CALCULATOR using transaction /ui2/flpcm_cust
 
 Use PFCG to create/change a role to use your catalog and assign to some users
 
