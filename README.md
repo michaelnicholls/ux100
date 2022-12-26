@@ -42,7 +42,7 @@ With the calculator services, you need to replace the operator with its encoded 
 
 Adding the parameter &source=CDS to the UI5 app will use the CDS service instead of the Gateway service
 
-Use /n/ui2/flpcat to create a new technical catalog, suggested name Z_TC_CALCULATOR.
+Use transaction /ui2/flpcat to create a new technical catalog, suggested name Z_TC_CALCULATOR.
 
 * semantic object: calculator
 * action: start
@@ -56,6 +56,8 @@ Add a new dynamic tile
 * Title: Calculator
 * service URL: /sap/opu/odata/sap/Z_DYNAMIC_TILE_SRV/dataSet('') (or some other value in '')
 * refresh interval: 120 (or some other value)
+
+You may need to create your own catalog as a copy Z_TC_CALCULATOR using transaction /ui2/flpd_cust
 
 Use PFCG to create/change a role to use your catalog and assign to some users
 
