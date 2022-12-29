@@ -64,10 +64,11 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
     IF ran3 < 30. er_entity-statearrow = 'Down'. ENDIF.
     IF ran3 > 60. er_entity-statearrow = 'None'. ENDIF.
     er_entity-title = er_entity-key.
-    text = 'in-process'.
-    IF ran5 < 20. text = 'completed'. ENDIF.
-    IF ran5 > 40. text = 'critical'. ENDIF.
-    IF ran5 > 60. text = 'inactive'. ENDIF.
+    text = 'begin'.
+    IF ran5 < 20. text = 'basket'. ENDIF.
+    IF ran5 > 40. text = 'instance'. ENDIF.
+    IF ran5 > 60. text = 'grid'. ENDIF.
     er_entity-icon = |sap-ICON://status-{ text }|.
+ er_entity-icon = |sap-icon://{ text }|.
   ENDMETHOD.
 ENDCLASS.
