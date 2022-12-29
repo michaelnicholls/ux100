@@ -6,15 +6,6 @@ class ZCL_Z_DYNAMIC_TILE_DPC_EXT definition
 public section.
 protected section.
 
-  methods CALC
-    importing
-      !IV_OP1 type I
-      !IV_OP2 type I
-      !IV_OP type STRING
-    exporting
-      !EV_RES type F
-      !EV_ERROR type STRING .
-
   methods DATASET_GET_ENTITY
     redefinition .
   PRIVATE SECTION.
@@ -71,42 +62,12 @@ CLASS ZCL_Z_DYNAMIC_TILE_DPC_EXT IMPLEMENTATION.
     er_entity-subtitle = | { sy-sysid }:{ sy-uname } |.
     er_entity-statearrow = 'Up'.
     IF ran3 < 30. er_entity-statearrow = 'Down'. ENDIF.
-    IF ran3 > 60. er_entity-statearrow = 'Neutral'. ENDIF.
+    IF ran3 > 60. er_entity-statearrow = 'None'. ENDIF.
     er_entity-title = er_entity-key.
     text = 'in-process'.
     IF ran5 < 20. text = 'completed'. ENDIF.
     IF ran5 > 40. text = 'critical'. ENDIF.
     IF ran5 > 60. text = 'inactive'. ENDIF.
     er_entity-icon = |sap-ICON://status-{ text }|.
-  ENDMETHOD.
-
-
-  METHOD calc .
-    CLEAR ev_error.
-    CLEAR ev_res.
-    CASE iv_op.
-      WHEN '+'.
-        ev_res = iv_op1 + iv_op2.
-      WHEN '-'.
-        ev_res = iv_op1 - iv_op2.
-      WHEN '*'.
-        ev_res = iv_op1 * iv_op2.
-      WHEN '/'.
-        IF iv_op2 = 0.
-          ev_error = 'no division by 0 allowed'(dbz).
-        ELSE.
-          ev_res = iv_op1 / iv_op2.
-        ENDIF.
-      WHEN '%'.
-        IF iv_op2 = 0.
-          ev_error = 'no percent of 0 allowed'(npz).
-        ELSE.
-          ev_res = iv_op1 * 100 /  iv_op2.
-        ENDIF.
-      WHEN OTHERS.
-        ev_error = | { text-bop }: { iv_op } |.
-    ENDCASE.
-
-
   ENDMETHOD.
 ENDCLASS.
