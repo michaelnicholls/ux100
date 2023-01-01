@@ -13,6 +13,8 @@ Test the services using transaction /IWFND/GW_CLIENT
 URI for testing dynamic tile: use /sap/opu/odata/sap/Z_DYNAMIC_TILE_SRV/dataSet('')
 URI for testing calculator service: /sap/opu/odata/SAP/ZCALCULATOR_SRV/calculatorSet
 
+(this service also returns the generated formula)
+
 In SE80, select BSP applications and open ZCALCULATOR
 
 Expand Pages with Flow logic and right click index.html to Select Test
@@ -26,6 +28,11 @@ Sample CDS calculator OData URL
 or
 
 /sap/opu/odata/sap/ZCALC_CDS/ZCALCSet(operand1=10,operand2=20,operator='%2B',x='')
+
+(
+to see the complete formula, use /sap/opu/odata/sap/ZCALC_FORMULA_CDS/ZCALC_FORMULASet(operand1=10,operand2=20,operator='%2B',x='')
+ 
+)
 
 
 With the calculator services, you need to replace the operator with its encoded value:
@@ -44,7 +51,7 @@ Adding the parameter &source=CDS to the UI5 app will use the CDS service instead
 
 Use transaction /ui2/flpcat to create a new technical catalog, suggested name Z_TC_CALCULATOR.
 
-* semantic object: calculator
+* semantic object: zcalculator
 * action: start
 * title: Calculator
 * type: SAPUi5 Fiori app
@@ -56,8 +63,9 @@ Add a new dynamic tile
 * Title: Calculator
 * service URL: /sap/opu/odata/sap/Z_DYNAMIC_TILE_SRV/dataSet('') (or some other value in '')
 * refresh interval: 120 (or some other value)
+* optionally, you can add a parameter: source, with value CDS or Gateway
 
-You may need to create your own catalog as a copy of the contents of Z_TC_CALCULATOR using transaction /ui2/flpcm_cust
+You may need to create your own catalog as a copy of the contents of Z_TC_CALCULATOR using transaction /ui2/flpcm_cust or /ui2/lflpd_cust
 
 Use PFCG to create/change a role to use your catalog and assign to some users
 
