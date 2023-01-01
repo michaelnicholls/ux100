@@ -109,8 +109,9 @@ METHOD calculatorset_get_entityset.
     IMPORTING
     ev_error = DATA(ev_error)
     ev_res   = DATA(ev_res) ).
+    data(formula) = |{ lv_op1 } { lv_op } { lv_op2 } = { ev_res } |.
     et_entityset = VALUE #( BASE et_entityset
-    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops ) ).
+    ( operand1 = lv_op1 operand2 = lv_op2 operator = lv_op result = ev_res error = ev_error ops = validops formula = formula ) ).
   ENDDO.
 ENDMETHOD.
 ENDCLASS.

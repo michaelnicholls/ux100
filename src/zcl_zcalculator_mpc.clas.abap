@@ -11,6 +11,7 @@ public section.
      OPERATOR type C length 1,
      OPERAND2 type /IWBEP/SB_ODATA_TY_INT2,
      RESULT type P length 6 decimals 2,
+     FORMULA type C length 20,
      ERROR type C length 30,
      OPS type C length 20,
   end of TS_CALCULATOR .
@@ -148,6 +149,15 @@ lo_property->set_maxlength( iv_max_length = 10 ). "#EC NOTEXT
 
 lo_property->set_nullable( abap_false ).
 
+lo_property = lo_entity_type->create_property( iv_property_name = 'formula' iv_abap_fieldname = 'FORMULA' ). "#EC NOTEXT
+
+
+lo_property->set_type_edm_string( ).
+lo_property->set_maxlength( iv_max_length = 20 ). "#EC NOTEXT
+
+
+lo_property->set_nullable( abap_false ).
+
 lo_property = lo_entity_type->create_property( iv_property_name = 'error' iv_abap_fieldname = 'ERROR' ). "#EC NOTEXT
 
 
@@ -191,24 +201,24 @@ DATA: lo_label_elem TYPE REF TO /iwbep/if_mgw_vocan_label_elem.   " Vocabulary A
 DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary Annotation Reference
 
 
-  lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_VALIDATION'
-                                                                iv_vocab_version = '0001').    "#EC NOTEXT
-  lo_reference->create_include( iv_namespace = 'Org.OData.Validation.V1' ).    "#EC NOTEXT
-  lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_CORE'
-                                                                iv_vocab_version = '0001').    "#EC NOTEXT
-  lo_reference->create_include( iv_namespace = 'Org.OData.Core.V1' ).    "#EC NOTEXT
-  lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_COMMUNICATION'
-                                                                iv_vocab_version = '0001').    "#EC NOTEXT
-  lo_reference->create_include( iv_namespace = 'com.sap.vocabularies.Communication.v1' ).    "#EC NOTEXT
-  lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_AGGREGATION'
-                                                                iv_vocab_version = '0001').    "#EC NOTEXT
-  lo_reference->create_include( iv_namespace = 'Org.OData.Aggregation.V1' ).    "#EC NOTEXT
   lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_UI'
                                                                 iv_vocab_version = '0001').    "#EC NOTEXT
   lo_reference->create_include( iv_namespace = 'com.sap.vocabularies.UI.v1' ).    "#EC NOTEXT
+  lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_CORE'
+                                                                iv_vocab_version = '0001').    "#EC NOTEXT
+  lo_reference->create_include( iv_namespace = 'Org.OData.Core.V1' ).    "#EC NOTEXT
+  lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_VALIDATION'
+                                                                iv_vocab_version = '0001').    "#EC NOTEXT
+  lo_reference->create_include( iv_namespace = 'Org.OData.Validation.V1' ).    "#EC NOTEXT
+  lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_COMMUNICATION'
+                                                                iv_vocab_version = '0001').    "#EC NOTEXT
+  lo_reference->create_include( iv_namespace = 'com.sap.vocabularies.Communication.v1' ).    "#EC NOTEXT
   lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_COMMON'
                                                                 iv_vocab_version = '0001').    "#EC NOTEXT
   lo_reference->create_include( iv_namespace = 'com.sap.vocabularies.Common.v1' ).    "#EC NOTEXT
+  lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_AGGREGATION'
+                                                                iv_vocab_version = '0001').    "#EC NOTEXT
+  lo_reference->create_include( iv_namespace = 'Org.OData.Aggregation.V1' ).    "#EC NOTEXT
   lo_reference = vocab_anno_model->create_vocabulary_reference( iv_vocab_id = '/IWBEP/VOC_UI'
                                                                 iv_vocab_version = '0001').    "#EC NOTEXT
   lo_reference->create_include( iv_namespace = 'com.sap.vocabularies.UI.v1' ).    "#EC NOTEXT
@@ -250,26 +260,31 @@ DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary A
   lo_reference->create_include( iv_namespace = 'com.sap.vocabularies.DataIntegration.v1' ).    "#EC NOTEXT
 
 
-  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator/res' ).    "#EC NOTEXT
-  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
-  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.Common.v1.Text' ).    "#EC NOTEXT
-  lo_simp_value = lo_annotation->create_simple_value( ).
-  lo_simp_value->set_string( 'Result' ).    "#EC NOTEXT
-  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator/operator' ).    "#EC NOTEXT
-  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
-  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.Common.v1.Text' ).    "#EC NOTEXT
-  lo_simp_value = lo_annotation->create_simple_value( ).
-  lo_simp_value->set_string( '' ).    "#EC NOTEXT
-  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator/operand2' ).    "#EC NOTEXT
-  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
-  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.Common.v1.Text' ).    "#EC NOTEXT
-  lo_simp_value = lo_annotation->create_simple_value( ).
-  lo_simp_value->set_string( 'Operand2' ).    "#EC NOTEXT
   lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator/operand1' ).    "#EC NOTEXT
   lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
   lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.Common.v1.Text' ).    "#EC NOTEXT
   lo_simp_value = lo_annotation->create_simple_value( ).
   lo_simp_value->set_string( 'Operand1' ).    "#EC NOTEXT
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator/operand2' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.Common.v1.Text' ).    "#EC NOTEXT
+  lo_simp_value = lo_annotation->create_simple_value( ).
+  lo_simp_value->set_string( 'Operand2' ).    "#EC NOTEXT
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator/operator' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.Common.v1.Text' ).    "#EC NOTEXT
+  lo_simp_value = lo_annotation->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator/res' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.Common.v1.Text' ).    "#EC NOTEXT
+  lo_simp_value = lo_annotation->create_simple_value( ).
+  lo_simp_value->set_string( 'Result' ).    "#EC NOTEXT
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator/ops' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.Hidden' ).    "#EC NOTEXT
+  lo_simp_value = lo_annotation->create_simple_value( ).
+  lo_simp_value->set_boolean( 'X' ).
   endmethod.
 
 
@@ -283,7 +298,7 @@ DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary A
 *&---------------------------------------------------------------------*
 
 
-  CONSTANTS: lc_gen_date_time TYPE timestamp VALUE '20221223062650'.                  "#EC NOTEXT
+  CONSTANTS: lc_gen_date_time TYPE timestamp VALUE '20230101003451'.                  "#EC NOTEXT
   rv_last_modified = super->get_last_modified( ).
   IF rv_last_modified LT lc_gen_date_time.
     rv_last_modified = lc_gen_date_time.
