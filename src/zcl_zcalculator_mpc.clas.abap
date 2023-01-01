@@ -285,6 +285,62 @@ DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary A
   lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.Hidden' ).    "#EC NOTEXT
   lo_simp_value = lo_annotation->create_simple_value( ).
   lo_simp_value->set_boolean( 'X' ).
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.LineItem' ).    "#EC NOTEXT
+  lo_collection = lo_annotation->create_collection( ).
+  lo_record = lo_collection->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.DataField' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( 'Formula' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Criticality' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'CriticalityRepresentation' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'IconUrl' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Value' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_path( 'formula' ).    "#EC NOTEXT
+  lo_record = lo_collection->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.DataField' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( 'Error' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Criticality' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'CriticalityRepresentation' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'IconUrl' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Value' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_path( 'error' ).    "#EC NOTEXT
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.Identification' ).    "#EC NOTEXT
+  lo_collection = lo_annotation->create_collection( ).
+  lo_record = lo_collection->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.DataField' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Criticality' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'CriticalityRepresentation' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'IconUrl' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Value' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_path( 'formula' ).    "#EC NOTEXT
   endmethod.
 
 
@@ -298,7 +354,7 @@ DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary A
 *&---------------------------------------------------------------------*
 
 
-  CONSTANTS: lc_gen_date_time TYPE timestamp VALUE '20230101003451'.                  "#EC NOTEXT
+  CONSTANTS: lc_gen_date_time TYPE timestamp VALUE '20230101130950'.                  "#EC NOTEXT
   rv_last_modified = super->get_last_modified( ).
   IF rv_last_modified LT lc_gen_date_time.
     rv_last_modified = lc_gen_date_time.

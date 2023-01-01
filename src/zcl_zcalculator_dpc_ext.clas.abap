@@ -81,6 +81,7 @@ CLASS ZCL_ZCALCULATOR_DPC_EXT IMPLEMENTATION.
   er_entity-error = lv_error.
   er_entity-result = lv_res.
   er_entity-ops = validops.
+  er_entity-formula =  |{ lv_op1 } { lv_op } { lv_op2 } = { lv_res } |.
   ENDMETHOD.
 
 
