@@ -260,6 +260,21 @@ DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary A
   lo_reference->create_include( iv_namespace = 'com.sap.vocabularies.DataIntegration.v1' ).    "#EC NOTEXT
 
 
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculatorSet' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.CreateHidden' ).    "#EC NOTEXT
+  lo_simp_value = lo_annotation->create_simple_value( ).
+  lo_simp_value->set_boolean( 'X' ).
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculatorSet' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.UpdateHidden' ).    "#EC NOTEXT
+  lo_simp_value = lo_annotation->create_simple_value( ).
+  lo_simp_value->set_boolean( 'X' ).
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculatorSet' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.DeleteHidden' ).    "#EC NOTEXT
+  lo_simp_value = lo_annotation->create_simple_value( ).
+  lo_simp_value->set_boolean( 'X' ).
   lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator/operand1' ).    "#EC NOTEXT
   lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
   lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.Common.v1.Text' ).    "#EC NOTEXT
@@ -285,6 +300,28 @@ DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary A
   lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.Hidden' ).    "#EC NOTEXT
   lo_simp_value = lo_annotation->create_simple_value( ).
   lo_simp_value->set_boolean( 'X' ).
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.Facets' ).    "#EC NOTEXT
+  lo_collection = lo_annotation->create_collection( ).
+  lo_record = lo_collection->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.Facet' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( 'facet' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'ID' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.HeaderFacets' ).    "#EC NOTEXT
+  lo_collection = lo_annotation->create_collection( ).
+  lo_record = lo_collection->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.Facet' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( 'header label' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'ID' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
   lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator' ).    "#EC NOTEXT
   lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
   lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.LineItem' ).    "#EC NOTEXT
@@ -321,14 +358,152 @@ DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary A
   lo_property = lo_record->create_property( 'Value' ).   "#EC NOTEXT
   lo_simp_value = lo_property->create_simple_value( ).
   lo_simp_value->set_path( 'error' ).    "#EC NOTEXT
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculatorSet' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'Org.OData.Capabilities.V1.InsertRestrictions' ).    "#EC NOTEXT
+  lo_record = lo_annotation->create_record( iv_record_type = 'Org.OData.Capabilities.V1.InsertRestrictionsType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Insertable' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'NonInsertableProperties' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'NonInsertableNavigationProperties' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'MaxLevels' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_integer( 0  ).
+  lo_property = lo_record->create_property( 'Permission' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_record = lo_property->create_record( iv_record_type = 'Org.OData.Capabilities.V1.PermissionType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Scopes' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'QueryOptions' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_record = lo_property->create_record( iv_record_type = 'Org.OData.Capabilities.V1.ModificationQueryOptionsType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'ExpandSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'SelectSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'ComputeSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'FilterSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'SearchSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'SortSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'CustomHeaders' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'CustomQueryOptions' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculatorSet' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'Org.OData.Capabilities.V1.UpdateRestrictions' ).    "#EC NOTEXT
+  lo_record = lo_annotation->create_record( iv_record_type = 'Org.OData.Capabilities.V1.UpdateRestrictionsType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Updatable' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'NonUpdatableNavigationProperties' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'MaxLevels' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_integer( 0  ).
+  lo_property = lo_record->create_property( 'Permission' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_record = lo_property->create_record( iv_record_type = 'Org.OData.Capabilities.V1.PermissionType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Scopes' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'QueryOptions' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_record = lo_property->create_record( iv_record_type = 'Org.OData.Capabilities.V1.ModificationQueryOptionsType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'ExpandSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'SelectSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'ComputeSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'FilterSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'SearchSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'SortSupported' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'CustomHeaders' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'CustomQueryOptions' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculatorSet' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'Org.OData.Capabilities.V1.DeleteRestrictions' ).    "#EC NOTEXT
+  lo_record = lo_annotation->create_record( iv_record_type = 'Org.OData.Capabilities.V1.DeleteRestrictionsType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Deletable' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'NonDeletableNavigationProperties' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'MaxLevels' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_integer( 0  ).
+  lo_property = lo_record->create_property( 'Permission' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_record = lo_property->create_record( iv_record_type = 'Org.OData.Capabilities.V1.PermissionType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Scopes' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'CustomHeaders' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_property = lo_record->create_property( 'CustomQueryOptions' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculatorSet' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'Org.OData.Capabilities.V1.SearchRestrictions' ).    "#EC NOTEXT
+  lo_record = lo_annotation->create_record( iv_record_type = 'Org.OData.Capabilities.V1.SearchRestrictionsType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Searchable' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_boolean( ' ' ).
+  lo_property = lo_record->create_property( 'UnsupportedExpressions' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
   lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator' ).    "#EC NOTEXT
   lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
-  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.Identification' ).    "#EC NOTEXT
-  lo_collection = lo_annotation->create_collection( ).
-  lo_record = lo_collection->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.DataField' ).    "#EC NOTEXT
-  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.HeaderInfo' ).    "#EC NOTEXT
+  lo_record = lo_annotation->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.HeaderInfoType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'TypeName' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( 'Formula' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'TypeNamePlural' ).   "#EC NOTEXT
   lo_simp_value = lo_property->create_simple_value( ).
   lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Title' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_record = lo_property->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.DataFieldAbstract' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( 'title label' ).    "#EC NOTEXT
   lo_property = lo_record->create_property( 'Criticality' ).   "#EC NOTEXT
   lo_simp_value = lo_property->create_simple_value( ).
   lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
@@ -338,9 +513,66 @@ DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary A
   lo_property = lo_record->create_property( 'IconUrl' ).   "#EC NOTEXT
   lo_simp_value = lo_property->create_simple_value( ).
   lo_simp_value->set_string( '' ).    "#EC NOTEXT
-  lo_property = lo_record->create_property( 'Value' ).   "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Description' ).   "#EC NOTEXT
   lo_simp_value = lo_property->create_simple_value( ).
-  lo_simp_value->set_path( 'formula' ).    "#EC NOTEXT
+  lo_record = lo_property->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.DataFieldAbstract' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( 'ldescription abel' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Criticality' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'CriticalityRepresentation' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'IconUrl' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'ImageUrl' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'TypeImageUrl' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Initials' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_ann_target = vocab_anno_model->create_annotations_target( 'calculator' ).    "#EC NOTEXT
+  lo_ann_target->set_namespace_qualifier( 'ZCALCULATOR_SRV' ).    "#EC NOTEXT
+  lo_annotation = lo_ann_target->create_annotation( iv_term = 'com.sap.vocabularies.UI.v1.FieldGroup' ).    "#EC NOTEXT
+  lo_record = lo_annotation->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.FieldGroupType' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( 'field group' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Data' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_collection = lo_property->create_collection( ).
+  lo_record = lo_collection->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.DataFieldAbstract' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_property_path( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Criticality' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'CriticalityRepresentation' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'IconUrl' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
+  lo_record = lo_collection->create_record( iv_record_type = 'com.sap.vocabularies.UI.v1.DataFieldAbstract' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Label' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( 'field group label' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'Criticality' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'CriticalityRepresentation' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_enum_member_by_name( '' ).    "#EC NOTEXT
+  lo_property = lo_record->create_property( 'IconUrl' ).   "#EC NOTEXT
+  lo_simp_value = lo_property->create_simple_value( ).
+  lo_simp_value->set_string( '' ).    "#EC NOTEXT
   endmethod.
 
 
@@ -354,7 +586,7 @@ DATA: lo_reference  TYPE REF TO /iwbep/if_mgw_vocan_reference.    " Vocabulary A
 *&---------------------------------------------------------------------*
 
 
-  CONSTANTS: lc_gen_date_time TYPE timestamp VALUE '20230101130950'.                  "#EC NOTEXT
+  CONSTANTS: lc_gen_date_time TYPE timestamp VALUE '20230101231327'.                  "#EC NOTEXT
   rv_last_modified = super->get_last_modified( ).
   IF rv_last_modified LT lc_gen_date_time.
     rv_last_modified = lc_gen_date_time.
