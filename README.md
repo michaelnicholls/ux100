@@ -65,7 +65,7 @@ Add a new dynamic tile
 * refresh interval: 120 (or some other value)
 * optionally, you can add a parameter: source, with value CDS or Gateway
 
-You may need to create your own catalog as a copy of the contents of Z_TC_CALCULATOR using transaction /ui2/flpcm_cust or /ui2/lflpd_cust
+You may need to create your own catalog as a copy of the contents of Z_TC_CALCULATOR using transaction /ui2/flpcm_cust or /ui2/flpd_cust
 
 Use PFCG to create/change a role to use your catalog and assign to some users
 
